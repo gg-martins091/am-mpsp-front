@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import Logo from '../../assets/logo.png';
 import api from "../../services/api";
@@ -16,23 +16,20 @@ class Login extends Component {
 
   handleSignIn = async e => {
     e.preventDefault();
-
     const { email, password } = this.state;
 
     if (!email || !password) {
       this.setState({ error: "Preencha e-mail e senha para acessar." });
     } else {
-
       try {
         // const response = await api.post("/sessions", { email, password });
         login('sasasas');
-        this.props.history.push("/app");
+        this.props.history.push("/dash");
       } catch (err) {
         this.setState({
           error:
             "Houve um problema com o login, verifique suas credenciais. T.T"
         });
-
       }
     }
   };
