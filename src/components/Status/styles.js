@@ -12,7 +12,4 @@ export const Container = styled.div`
     color: #111;
     margin-bottom: 25px;
   }
-  i {
-    margin-right: 5px
-  }
 `;

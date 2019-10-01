@@ -8,8 +8,6 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
   margin: 0;
   outline: 0;
-  background: #000029;
-  color: #fff;
 }
 body, html {
   font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
