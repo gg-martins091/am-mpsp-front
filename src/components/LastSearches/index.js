@@ -7,10 +7,12 @@ import {
   AccordionItemPanel,
   AccordionItemButton
 } from 'react-accessible-accordion';
+import app from '../../utils/firebase';
 
 class LastSearches extends Component {
   constructor(props) {
     super(props);
+    this.firestore = app.firestore();
     this.iconColors = {
       2: "status-doing",
       3: "status-ok",
@@ -59,7 +61,34 @@ class LastSearches extends Component {
     }
   }
 
+  componentDidMount() {
+    this.firestore.collection('flows').orderBy('created_at', 'desc').limit(3).onSnapshot(d => {
+      this.getData();
+    })
+  }
 
+  getData = async () => {
+    this.firestore.collection('flows')
+      .orderBy('created_at', 'desc').limit(3).get()
+      .then(d => {
+        d.forEach(flow => {
+          const data = flow.data();
+          this.firestore.collection('sources')
+            .where('flow_id', '==', parseInt(flow.id))
+            .get()
+            .then(sources => {
+              sources.forEach(s => {
+                console.log(s.id);
+                console.log(s.data());
+              })
+            }).catch(e => {
+              console.log(e);
+            })
+        })
+      }).catch(e => {
+        console.log(e);
+      })
+  }
 
   render() {
     const { data } = this.state;
@@ -77,7 +106,7 @@ class LastSearches extends Component {
                   </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
-                  <p>
+                  <div>
                     {item.link_relatorio &&
                       <a style={{ float: 'right' }} href={item.link_relatorio}>Acesse aqui o relatório</a>
                     }
@@ -87,14 +116,15 @@ class LastSearches extends Component {
                     }
                     <h6>Pesquisas:</h6>
                     <div style={listaSources}>
-                      {item.sources.map(s => {
+                      {item.sources.map((s, i) => {
                         const css = `fa fa-circle ${this.iconColors[s.status]}`;
+                        const key = `item.id-${i}`
                         return (
-                          <p style={{ marginLeft: '10px' }}><i class={css}></i> {s.name}</p>
+                          <p key={key} style={{ marginLeft: '10px' }}><i class={css}></i> {s.name}</p>
                         );
                       })}
                     </div>
-                  </p>
+                  </div>
                 </AccordionItemPanel>
               </AccordionItem>
             )
