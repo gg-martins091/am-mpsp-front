@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-
-import api from "../../services/api";
+import { withRouter } from "react-router-dom";
 
 import { Container, Content } from './styles';
 import LastSearches from '../../components/LastSearches';

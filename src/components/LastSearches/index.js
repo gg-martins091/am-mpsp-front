@@ -20,7 +20,7 @@ class LastSearches extends Component {
     }
     this.state = {
       data: [
-        {
+        /*{
           link_relatorio: "https://google.com",
           id: 33,
           cpf: "03322003991",
@@ -56,7 +56,7 @@ class LastSearches extends Component {
             }
           ]
         },
-
+*/
       ]
     }
   }
@@ -68,26 +68,29 @@ class LastSearches extends Component {
   }
 
   getData = async () => {
-    this.firestore.collection('flows')
-      .orderBy('created_at', 'desc').limit(3).get()
-      .then(d => {
-        d.forEach(flow => {
-          const data = flow.data();
-          this.firestore.collection('sources')
-            .where('flow_id', '==', parseInt(flow.id))
-            .get()
-            .then(sources => {
-              sources.forEach(s => {
-                console.log(s.id);
-                console.log(s.data());
-              })
-            }).catch(e => {
-              console.log(e);
-            })
-        })
-      }).catch(e => {
-        console.log(e);
-      })
+    let dataTmp = [];
+
+    const d = await this.firestore.collection('flows')
+      .orderBy('created_at', 'desc').limit(3).get();
+
+    for (let index = 0; index < d.docs.length; index++) {
+      const flow = d.docs[index];
+      let data = flow.data();
+      data['id'] = flow.id;
+      data['sources'] = [];
+      const sources = await this.firestore.collection('sources')
+        .where('flow_id', '==', parseInt(flow.id)).get();
+
+      sources.forEach(s => {
+        data['sources'].push(s.data());
+      });
+      dataTmp.push(data);
+    }
+
+    console.log(dataTmp);
+    this.setState({ data: dataTmp }, () => {
+      console.log(this.state);
+    });
   }
 
   render() {
@@ -102,7 +105,7 @@ class LastSearches extends Component {
               <AccordionItem key={item.id}>
                 <AccordionItemHeading>
                   <AccordionItemButton>
-                    Requisição #{item.id} <span style={created_at}>({item.created_at})</span>
+                    Requisição #{item.id} <span style={created_at}>({item.created_at.toDate()})</span>
                   </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
