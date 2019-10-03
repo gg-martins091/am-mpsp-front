@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Container, Content } from './styles';
 import LastSearches from '../../components/LastSearches';
 import Status from '../../components/Status';
+import NewSearch from '../../components/NewSearch';
 
 class Dashboard extends Component {
   state = {
@@ -23,6 +24,13 @@ class Dashboard extends Component {
               <LastSearches />
             </div>
           </div>
+          <hr />
+          <div className="row">
+            <div className="col">
+              <NewSearch />
+            </div>
+          </div>
+
         </Container>
       </Content>
     );

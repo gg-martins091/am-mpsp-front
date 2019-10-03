@@ -26,4 +26,5 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 10px 10px 200px;
 `

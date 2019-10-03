@@ -19,52 +19,18 @@ class LastSearches extends Component {
       4: "status-fail"
     }
     this.state = {
-      data: [
-        /*{
-          link_relatorio: "https://google.com",
-          id: 33,
-          cpf: "03322003991",
-          cpnj: null,
-          rg: null,
-          created_at: '20/03/2019 às 17:33',
-          sources: [
-            {
-              name: "Detran",
-              status: 2
-            },
-            {
-              name: "SUJESP",
-              status: 2
-            }
-          ]
-        },
-        {
-          link_relatorio: "https://google.com",
-          id: 32,
-          cpf: null,
-          cpnj: null,
-          rg: "829393578",
-          created_at: '18/03/2019 às 13:59',
-          sources: [
-            {
-              name: "Detran",
-              status: 4
-            },
-            {
-              name: "Outro",
-              status: 3
-            }
-          ]
-        },
-*/
-      ]
+      data: []
     }
   }
 
   componentDidMount() {
-    this.firestore.collection('flows').orderBy('created_at', 'desc').limit(3).onSnapshot(d => {
+    this.firestore.collection('flows').orderBy('created_at', 'desc').where('user_id', '==', 1).limit(3).onSnapshot(d => {
       this.getData();
-    })
+    });
+
+    this.firestore.collection('sources').orderBy('created_at', 'desc').where('user_id', '==', 1).onSnapshot(d => {
+      this.getData();
+    });
   }
 
   getData = async () => {
@@ -105,7 +71,7 @@ class LastSearches extends Component {
               <AccordionItem key={item.id}>
                 <AccordionItemHeading>
                   <AccordionItemButton>
-                    Requisição #{item.id} <span style={created_at}>({item.created_at.toDate()})</span>
+                    Requisição #{item.id} <span style={created_at}>({item.created_at.toDate().toISOString().substring(0, 10)})</span>
                   </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>

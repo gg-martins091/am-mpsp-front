@@ -6,6 +6,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   color: #333;
+  background: rgba(66, 152, 245, .3);
+  padding: 15px;
+  box-shadow: 4px 7px 15px -4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   margin-top: 15px;
   h3 {
     font-size: 18px;
