@@ -29,10 +29,9 @@ class LastSearches extends Component {
     this.firestore.collection('flows').orderBy('created_at', 'desc').where('user_id', '==', this.props.id).onSnapshot(d => {
       this.getData();
     });
-    /*
-        this.firestore.collection('sources').orderBy('created_at', 'desc').where('user_id', '==', this.props.id).onSnapshot(d => {
-          this.getData();
-        });*/
+    this.firestore.collection('sources').orderBy('created_at', 'desc').where('user_id', '==', this.props.id).onSnapshot(d => {
+      this.getData();
+    });
   }
 
   getData = async () => {
