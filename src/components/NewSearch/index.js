@@ -45,9 +45,12 @@ export default class NewSearch extends Component {
                 if (data.status === 201) {
                   resetForm();
                   toast.success('Requisição enviada com sucesso.', {containerId: 'A'});
+                } else {
+                  toast.error('Ocorreu um erro. Tente novamente mais tarde.', {containerId: 'A'});
                 }
                 setSubmitting(false);
-
+              }).catch(e => {
+                toast.error('Ocorreu um erro. Tente novamente mais tarde.', {containerId: 'A'});
               });
             }, 100);
           }}
