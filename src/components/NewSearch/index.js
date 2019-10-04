@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Formik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { Container, Form } from './styles';
 import api from '../../services/api';
@@ -18,6 +19,7 @@ export default class NewSearch extends Component {
   render() {
     return (
       <Container>
+        <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
         <h3>Nova pesquisa</h3>
         <Formik
           initialValues={{ cpf: '', cnpj: '', rg: '' }}
@@ -29,7 +31,7 @@ export default class NewSearch extends Component {
             if (values.cpf.length > 0 && (values.cpf.length < 10 || values.cpf.length > 11)) {
               errors.cpf = "Tamanho do CPF inválido.";
             }
-            if (values.rg.length > 0 && (values.rg.length < 8 || values.rg.length > 10)) {
+            if (values.rg.length > 0 && (values.rg.length < 9 || values.rg.length > 10)) {
               errors.rg = "Tamanho do RG inválido.";
             }
             if (values.cnpj.length > 0 && (values.cnpj.length < 14 || values.cnpj.length > 14)) {
@@ -40,8 +42,9 @@ export default class NewSearch extends Component {
           onSubmit={(values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               this.newSearch(values).then(data => {
-                if (data.status === 200) {
+                if (data.status === 201) {
                   resetForm();
+                  toast.success('Requisição enviada com sucesso.', {containerId: 'A'});
                 }
                 setSubmitting(false);
 
