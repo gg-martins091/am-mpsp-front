@@ -5,11 +5,14 @@ import { Container, Content } from './styles';
 import LastSearches from '../../components/LastSearches';
 import Status from '../../components/Status';
 import NewSearch from '../../components/NewSearch';
-
+//import {getUserId} from '../'
 class Dashboard extends Component {
-  state = {
-  };
+  constructor(props) {
+    super(props);
+  }
 
+  componentDidMount() {
+  }
   render() {
     return (
       <Content>
@@ -21,13 +24,13 @@ class Dashboard extends Component {
               <Status />
             </div>
             <div className="col">
-              <LastSearches />
+              <NewSearch />
             </div>
           </div>
           <hr />
           <div className="row">
             <div className="col">
-              <NewSearch />
+              <LastSearches id={} />
             </div>
           </div>
 

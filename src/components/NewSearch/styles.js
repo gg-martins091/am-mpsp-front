@@ -13,12 +13,10 @@ export const Container = styled.div`
   h3 {
     font-size: 18px;
     color: #111;
-    margin-bottom: 25px;
   }
 `;
 
 export const Form = styled.form`
-  width: 400px;
   border-radius: 8px;
   padding-top: 10px;
   display: flex;
@@ -42,7 +40,7 @@ export const Form = styled.form`
     padding: 10px 20px;
     color: #777;
     font-size: 15px;
-    width: 100%;
+    width: 108%;
     border: 1px solid #ccc;
     border-radius: 8px;
     &::placeholder {
@@ -65,6 +63,7 @@ export const Form = styled.form`
     border-radius: 5px;
     width: 30%;
     margin-top: 10px;
+    align-self: center;
     cursor: pointer;
     &:hover {
       background: #3a62c7;

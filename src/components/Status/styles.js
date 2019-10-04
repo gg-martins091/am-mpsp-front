@@ -14,6 +14,6 @@ export const Container = styled.div`
   h3 {
     font-size: 18px;
     color: #111;
-    margin-bottom: 25px;
+    margin-bottom: 45px;
   }
 `;

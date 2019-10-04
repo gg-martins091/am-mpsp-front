@@ -22,19 +22,15 @@ class Login extends Component {
   handleSignIn = async e => {
     const { email, password } = e;
 
-    if (!email || !password) {
-      this.setState({ error: "Preencha e-mail e senha para acessar." });
-    } else {
-      try {
-        const response = await api.post("/login", { email, password });
-        login(response.data.token);
-        this.props.history.push('/dash');
-      } catch (err) {
-        this.setState({
-          error:
-            "Houve um problema com o login, verifique suas credenciais."
-        });
-      }
+    try {
+      const response = await api.post("/login", { email, password });
+      login(response.data);
+      this.props.history.push('/dash');
+    } catch (err) {
+      this.setState({
+        error:
+          "Houve um problema com o login, verifique suas credenciais."
+      });
     }
   };
 

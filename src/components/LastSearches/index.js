@@ -8,6 +8,8 @@ import {
   AccordionItemButton
 } from 'react-accessible-accordion';
 import app from '../../utils/firebase';
+import Loader from 'react-loader-spinner'
+
 
 class LastSearches extends Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class LastSearches extends Component {
   }
 
   componentDidMount() {
-    this.firestore.collection('flows').orderBy('created_at', 'desc').where('user_id', '==', 1).limit(3).onSnapshot(d => {
+    this.firestore.collection('flows').orderBy('created_at', 'desc').where('user_id', '==', 1).onSnapshot(d => {
       this.getData();
     });
 
@@ -53,10 +55,7 @@ class LastSearches extends Component {
       dataTmp.push(data);
     }
 
-    console.log(dataTmp);
-    this.setState({ data: dataTmp }, () => {
-      console.log(this.state);
-    });
+    this.setState({ data: dataTmp });
   }
 
   render() {
@@ -64,6 +63,15 @@ class LastSearches extends Component {
     return (
       <Container>
         <h3>Últimas buscas</h3>
+        {data.length < 1 && <Loader
+          type="Watch"
+          color="#00BFFF"
+          height={70}
+          width={50}
+          timeout={3000} //3 secs
+          style={{ alignSelf: 'center' }}
+
+        />}
         <Accordion
           allowZeroExpanded={true}>
           {data.map(item => {
@@ -83,7 +91,10 @@ class LastSearches extends Component {
                     {!item.link_relatorio &&
                       <span style={{ float: 'right', color: '#999' }}>Relatório em processamento...</span>
                     }
-                    <h6>Pesquisas:</h6>
+                    {item.cpf && <span className="lastResearchField">CPF: {item.cpf}</span>}
+                    {item.cnpj && <span className="lastResearchField">CNPJ: {item.cnpj}</span>}
+                    {item.rg && <span className="lastResearchField">RG: {item.rg}</span>}
+                    <h6>Portais:</h6>
                     <div style={listaSources}>
                       {item.sources.map((s, i) => {
                         const css = `fa fa-circle ${this.iconColors[s.status]}`;

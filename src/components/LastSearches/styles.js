@@ -19,4 +19,8 @@ export const Container = styled.div`
   i {
     margin-right: 5px
   }
+  h6 {
+    font-weight: bold;
+    margin-top: 20px;
+  }
 `;
