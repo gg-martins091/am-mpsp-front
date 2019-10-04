@@ -40,12 +40,10 @@ export default class NewSearch extends Component {
           onSubmit={(values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               this.newSearch(values).then(data => {
-                console.log(data);
-                if (data.status == 200) {
-
+                if (data.status === 200) {
+                  resetForm();
                 }
                 setSubmitting(false);
-                resetForm();
 
               });
             }, 100);

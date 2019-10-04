@@ -26,20 +26,19 @@ class LastSearches extends Component {
   }
 
   componentDidMount() {
-    this.firestore.collection('flows').orderBy('created_at', 'desc').where('user_id', '==', 1).onSnapshot(d => {
+    this.firestore.collection('flows').orderBy('created_at', 'desc').where('user_id', '==', this.props.id).onSnapshot(d => {
       this.getData();
     });
-
-    this.firestore.collection('sources').orderBy('created_at', 'desc').where('user_id', '==', 1).onSnapshot(d => {
-      this.getData();
-    });
+    /*
+        this.firestore.collection('sources').orderBy('created_at', 'desc').where('user_id', '==', this.props.id).onSnapshot(d => {
+          this.getData();
+        });*/
   }
 
   getData = async () => {
     let dataTmp = [];
-
     const d = await this.firestore.collection('flows')
-      .orderBy('created_at', 'desc').limit(3).get();
+      .orderBy('created_at', 'desc').where('user_id', '==', this.props.id).get();
 
     for (let index = 0; index < d.docs.length; index++) {
       const flow = d.docs[index];
@@ -68,7 +67,6 @@ class LastSearches extends Component {
           color="#00BFFF"
           height={70}
           width={50}
-          timeout={3000} //3 secs
           style={{ alignSelf: 'center' }}
 
         />}
