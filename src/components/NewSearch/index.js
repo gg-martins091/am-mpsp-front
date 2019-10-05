@@ -25,7 +25,7 @@ export default class NewSearch extends Component {
           initialValues={{ cpf: '', cnpj: '', rg: '' }}
           validate={values => {
             let errors = {};
-            if (!values.cpf && !values.rg && !values.cpnj) {
+            if (!values['cpf'] && !values['rg'] && !values['cnpj']) {
               errors.geral = 'Preencha pelo menos um dos campos de pesquisa.';
             }
             if (values.cpf.length > 0 && (values.cpf.length < 10 || values.cpf.length > 11)) {
@@ -51,6 +51,7 @@ export default class NewSearch extends Component {
                 setSubmitting(false);
               }).catch(e => {
                 toast.error('Ocorreu um erro. Tente novamente mais tarde.', {containerId: 'A'});
+                setSubmitting(false);
               });
             }, 100);
           }}
@@ -69,7 +70,7 @@ export default class NewSearch extends Component {
               <Form onSubmit={handleSubmit}>
                 <div className="inputs">
                   <input
-                    type="text"
+                    type="number"
                     name="cpf"
                     placeholder="CPF"
                     onChange={handleChange}
@@ -78,7 +79,7 @@ export default class NewSearch extends Component {
                   />
                   {errors.cpf && touched.cpf && <p>{errors.cpf}</p>}
                   <input
-                    type="text"
+                    type="number"
                     name="rg"
                     placeholder="RG"
                     onChange={handleChange}
@@ -87,7 +88,7 @@ export default class NewSearch extends Component {
                   />
                   {errors.rg && touched.rg && <p>{errors.rg}</p>}
                   <input
-                    type="text"
+                    type="number"
                     name="cnpj"
                     placeholder="CNPJ"
                     onChange={handleChange}

@@ -82,7 +82,7 @@ class LastSearches extends Component {
                 <AccordionItemPanel>
                   <div>
                     {item.link_relatorio &&
-                      <a style={{ float: 'right' }} href={item.link_relatorio}>Acesse aqui o relatório</a>
+                      <a style={{ float: 'right' }} href={item.link_relatorio} target="_blank">Acesse aqui o relatório</a>
                     }
 
                     {!item.link_relatorio &&
