@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "./auth";
 
 const api = axios.create({
-  baseURL: "https://am-mpsp.appspot.com/api/v1"
+  baseURL: "http://104.154.104.125/api/v1"
 });
 
 api.interceptors.request.use(async config => {
