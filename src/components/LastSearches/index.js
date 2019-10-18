@@ -29,10 +29,9 @@ class LastSearches extends Component {
     this.firestore.collection('flows').orderBy('created_at', 'desc').where('user_id', '==', this.props.id).onSnapshot(d => {
       this.getData();
     });
-    /*
-        this.firestore.collection('sources').orderBy('created_at', 'desc').where('user_id', '==', this.props.id).onSnapshot(d => {
-          this.getData();
-        });*/
+    this.firestore.collection('sources').orderBy('created_at', 'desc').where('user_id', '==', this.props.id).onSnapshot(d => {
+      this.getData();
+    });
   }
 
   getData = async () => {
@@ -83,7 +82,7 @@ class LastSearches extends Component {
                 <AccordionItemPanel>
                   <div>
                     {item.link_relatorio &&
-                      <a style={{ float: 'right' }} href={item.link_relatorio}>Acesse aqui o relatório</a>
+                      <a style={{ float: 'right' }} href={item.link_relatorio} target="_blank">Acesse aqui o relatório</a>
                     }
 
                     {!item.link_relatorio &&
