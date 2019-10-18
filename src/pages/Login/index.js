@@ -6,6 +6,7 @@ import api from "../../services/api";
 import { login, getToken } from "../../services/auth";
 
 import { Form, Container } from "./styles";
+import { IconedInput } from '../../styles';
 import { Formik } from 'formik';
 
 class Login extends Component {
@@ -70,24 +71,33 @@ class Login extends Component {
           }) => (
 
               <Form onSubmit={handleSubmit}>
-                <img src={Logo} alt="CINQUENTAK" />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Endereço de e-mail"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                />
+                <h1>CINQUENTAK</h1>
+                <IconedInput>
+                  <i class="fa fa-user"></i>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Endereço de e-mail"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                </IconedInput>
+
                 {errors.email && touched.email && <p>{errors.email}</p>}
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Senha"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                />
+
+                <IconedInput>
+                  <i class="fa fa-lock"></i>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Senha"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                </IconedInput>
+
                 {errors.password && touched.password && errors.password}
                 {this.state.error && <p>{this.state.error}</p>}
                 <button style={isSubmitting ? { background: '#ccc' } : {}} type="submit" disabled={isSubmitting}>Entrar</button>

@@ -1,8 +1,8 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 import "font-awesome/css/font-awesome.css";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 * {
   box-sizing: border-box;
   padding: 0;
@@ -18,4 +18,21 @@ body, html {
 }
 `;
 
-export default GlobalStyle;
+
+export const IconedInput = styled.div`
+  position: relative;
+  width: 100%;
+  i {
+    color: #CCC;
+    display: block;
+    font-size: 15px;
+    height: 16px;
+    margin: 10px 5px 8px 10px;
+    position: absolute;
+    text-align: center;
+    width: 16px;
+  }
+  input {
+    padding-left: 30px!important;
+  }
+`

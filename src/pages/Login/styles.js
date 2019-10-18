@@ -5,23 +5,28 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: #fff;
-
+  background: rgb(0,28,120);
+  background: linear-gradient(143deg, rgba(0,28,120,1) 0%, rgba(0,46,199,1) 56%, rgba(0,149,255,1) 100%);
 `;
 
 export const Form = styled.form`
-  width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 30px 25px;
+  width: 350px;
+  border-top: 1px solid #fff;
+  background: #002294;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+  padding: 20px 30px 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  h1 {
+    margin-bottom: 25px;
+    color: #fff;
+  }
   img {
     margin-bottom: 25px;
   }
   p {
-    color: #ff3333;
+    color: #fff;
     margin-bottom: 15px;
     padding: 10px;
     width: 100%;
@@ -30,12 +35,11 @@ export const Form = styled.form`
   input {
     flex: 1;
     margin-bottom: 15px;
-    padding: 10px 20px;
+    padding: 5px 10px;
     color: #777;
     font-size: 15px;
     width: 100%;
     border: 1px solid #ccc;
-    border-radius: 8px;
     &::placeholder {
       color: #ccc;
     }
@@ -51,10 +55,9 @@ export const Form = styled.form`
     color: #fff;
     font-size: 16px;
     background: #3a41c7;
-    height: 56px;
     border: 0;
-    border-radius: 5px;
-    width: 40%;
+    width: 100%;
+    padding: 10px 40px;
     margin-top: 10px;
     cursor: pointer;
     &:hover {
